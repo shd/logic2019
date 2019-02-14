@@ -56,4 +56,47 @@
 \end{enumerate}
 \end{enumerate}
 
+\section*{Домашнее задание №2: <<исчисление высказываний>>}
+
+\begin{enumerate}
+
+\item (Теоремы о корректности и полноте) Пусть $\Gamma$ --- какой-то список
+высказываний и пусть $\alpha$ --- высказывание.
+
+\begin{enumerate}
+\item Покажите, что $\Gamma\vdash\alpha$ влечёт $\Gamma\models\alpha$.
+\item Покажите, что $\Gamma\models\alpha$ влечёт $\Gamma\vdash\alpha$.
+\end{enumerate}
+
+\item (Теорема Гливенко) Рассмотрим исчисление высказываний, в котором 10 схема аксиом 
+(аксиома снятия двойного отрицания)
+$$\alpha\rightarrow\neg\neg\alpha$$
+заменена на следующую:
+$$\alpha\rightarrow\neg\alpha\rightarrow\beta$$
+Такой вариант исчисления высказываний назовём интуиционистским.
+Будем писать $\Gamma \vdash_{\texttt{и}} \alpha$, если существует
+вывод формулы $\alpha$ из гипотез $\Gamma$ в интуиционистском исчислении
+высказываний. Если же вывод производится в классическом исчислении
+(изученном на 1 и 2 занятиях), будем указывать это как $\Gamma \vdash_{\texttt{к}} \alpha$.
+
+\begin{enumerate}
+\item Покажите, что если $\Gamma \vdash_{\texttt{и}} \alpha$, то 
+$\Gamma \vdash_{\texttt{к}} \alpha$.
+\item Покажите, что если $\alpha$ --- аксиома ($1\dots 9$ схемы), то 
+$\vdash_{\texttt{и}} \neg\neg\alpha$.
+\item Покажите, что $\vdash_{\texttt{и}} \neg\neg(\neg\neg\alpha\rightarrow\alpha)$.
+\item Покажите, что если $\vdash_{\texttt{и}} \neg\neg\alpha$ и $\vdash_{\texttt{и}} \neg\neg(\alpha\rightarrow\beta)$,
+то $\vdash_{\texttt{и}} \neg\neg\beta$.
+\item Покажите, что если $\vdash_{\texttt{к}} \alpha$, то $\vdash_{\texttt{и}} \neg\neg\alpha$ (теорема Гливенко).
+\item Покажите, что если $\Gamma \vdash_{\texttt{к}} \alpha$, то $\Gamma \vdash_{\texttt{и}} \neg\neg\alpha$.
+\item Назовём (классическое или интуиционистское) исчисление \emph{противоречивым}, 
+если для любой формулы $\alpha$ выполнено $\vdash \alpha$.
+Покажите, что формула $\alpha$ исчисления, такая, что $\vdash \alpha$ и $\vdash\neg\alpha$, 
+существует тогда и только тогда, когда исчисление противоречиво.
+\item Покажите, что если классическое исчисление высказываний противоречиво, то противоречиво и интуиционистское
+исчисление высказываний.
+\end{enumerate}
+
+\end{enumerate}
+
 \end{document}
