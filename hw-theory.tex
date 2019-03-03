@@ -9,8 +9,8 @@
 \usepackage{cmll}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
 \usepackage{proof}
-\newcommand{\gq}[1]{\texttt{<<}#1\texttt{>>}}
-\newcommand{\ogq}[1]{\overline{\texttt{<<}#1\texttt{>>}}}
+\usepackage{tikz}
+\usetikzlibrary{arrows,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
 \begin{document}
 
 \begin{center}{\Large\textsc{\textbf{Теоретические (``малые'') домашние задания}}}\\
@@ -165,6 +165,81 @@ $A \in \Omega$ тогда и только тогда, когда если $a \in
 (если взять в качестве носителя $\mathbb{R}$)?
 \item Найдите $\{0\}^\circ$ и $\overline{\{0\}}$ в первых трёх топологиях из п. 2 
 (если взять в качестве носителя $\mathbb{R}$)?
+
+\end{enumerate}
+
+\section*{Домашнее задание №4: <<решётки, псевдобулевы и булевы алгебры>>}
+
+\begin{enumerate}
+
+\item Пусть задана некоторая решётка, в которой задано псевдодополнение.
+Докажите, что эта решётка является дистрибутивной.
+
+\item Пусть задана дистрибутивная решётка. Покажите, что в ней для любых элементов 
+$a,b,c$ выполнено $(a+b)\cdot c = a\cdot b \rightarrow a \cdot c$.
+
+\item Покажите, что если в решётке есть \emph{диамант} или \emph{пентагон}
+(то есть, найдутся 5 элементов указанным образом упорядоченных, среди которых есть две или 
+три пары несравнимых), то решётка не является дистрибутивной:
+\begin{center}\tikz{
+\node at (1,2)   (A) {A};
+\node at (0,0.5) (B) {B};
+\node at (1,0.5) (C) {C};
+\node at (2,0.5) (D) {D};
+\node at (1,-1)  (E) {E};
+\draw[->] (A) to (B); \draw[->] (B) to (E);
+\draw[->] (A) to (C); \draw[->] (C) to (E);
+\draw[->] (A) to (D); \draw[->] (D) to (E);
+
+\node at (5,2)   (A1) {A};
+\node at (4,0.5) (B1) {B};
+\node at (6,1)   (C1) {C};
+\node at (6,0)   (D1) {D};
+\node at (5,-1)  (E1) {E};
+\draw[->] (A1) to (B1); \draw[->] (B1) to (E1);
+\draw[->] (A1) to (C1); \draw[->] (C1) to (D1); \draw[->] (D1) to (E1);
+}\end{center}
+
+\item Предложите пример дистрибутивной, но не импликативной решётки.
+
+\item Докажите, что в импликативной решётке при любых значениях $a$, $b$ и $c$ 
+выполнены следующие утверждения:
+
+\begin{enumerate}
+\item Из $a \sqsubseteq b$ следует $b\to c \sqsubseteq a\to c$ и $c\to a \sqsubseteq c \to b$;
+\item Из $a \sqsubseteq b \to c$ следует $a \cdot b \sqsubseteq c$;
+\item $a \sqsubseteq b$ выполнено тогда и только тогда, когда $a \to b = 1$;
+\item $b \sqsubseteq a \rightarrow b$;
+\item $a \rightarrow b \sqsubseteq ((a \rightarrow (b \rightarrow c)) \rightarrow (a \rightarrow c))$;
+\item $a \sqsubseteq b \rightarrow a \cdot b$;
+\item $a \rightarrow c \sqsubseteq (b \rightarrow c) \rightarrow (a + b \rightarrow c)$
+\end{enumerate}
+
+\item Пусть заданы некоторая алгебра Гейтинга $\langle H, \sqsubseteq\rangle$
+и переменные $A$, $B$, $C$ со значениями $a$, $b$, $c$ ($a,b,c \in H$). Покажите, что:
+\begin{enumerate}
+\item[(a-i)] Если $\phi$ --- схема аксиом 1--9, то при подстановке переменных $A$, $B$, $C$ вместо 
+вместо метапеременных при любых $a$, $b$, $c$ будет выполнено $\llbracket\phi\rrbracket = \texttt{И}$;
+\item[(j)] Аналогично, будет выполнено 
+$\llbracket\alpha\rightarrow\neg\alpha\rightarrow\beta\rrbracket = \texttt{И}$;
+\item[(k)] Если заданная алгебра Гейтинга --- булева, то тогда выполнено и
+$\llbracket\alpha\rightarrow\neg\neg\alpha\rrbracket = \texttt{И}$ и 
+$\llbracket\alpha\vee\neg\alpha\rrbracket = \texttt{И}$.
+\item[(l)] Пусть $\phi$ и $\phi\rightarrow\tau$ --- некоторые истинные высказывания в указанной
+алгебре при указанных значениях переменных. Тогда $\tau$ --- тоже истинное высказывание
+\end{enumerate}
+
+\item На основании предыдущего пункта покажите, что алгебра Гейтинга корректна как модель ИИВ,
+и что булева алгебра корректна как модель ИВ.
+
+\item Про следующие высказывания определите, являются ли они доказуемыми в ИИВ:
+\begin{enumerate}
+\item $((P\to Q)\to P)\to P$ (закон Пирса);
+\item $(\neg P\to Q)\vee(P \to\neg Q)$;
+\item $(P \to \neg Q) \rightarrow (Q \to \neg P)$;
+\item $P \rightarrow \neg\neg P$;
+\item $\neg\neg P \vee \neg\neg\neg P$;
+\end{enumerate}
 
 \end{enumerate}
 
