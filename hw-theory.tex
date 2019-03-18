@@ -396,4 +396,49 @@ $$\bigvee_{i \ne j; 0 < i,j \le n} (A_i \to A_j)$$
 
 \end{enumerate}
 
+\section*{Домашнее задание №6: <<Исчисление предикатов>>}
+
+\begin{enumerate}
+\item Новые аксиомы и теоремы для исчисления предикатов имеют ограничения
+(требования свободы для подстановки и отсутствия свободных вхождений). 
+Если эти требования будут нарушены, исчисление станет некорректным.
+Данный факт можно показать, построив соответствующие опровергающие
+оценки для каких-то доказуемых формул. Постройте соответствующие формулы,
+доказательства и оценки.
+
+\item Докажите следующие формулы в исчислении предикатов:
+\begin{enumerate}
+\item $\forall a.\phi\rightarrow \phi$
+\item $(\forall a.\phi)\rightarrow (\exists a.\phi)$
+\item $(\forall a.\forall a.\phi) \rightarrow (\forall a.\phi)$
+\item $(\forall a.\phi) \rightarrow (\neg \exists a.\neg \phi)$ 
+\item $(\exists a.\phi) \rightarrow (\neg \forall a.\neg \phi)$
+\item $(\forall a.\neg\phi) \rightarrow (\neg \exists a.\phi)$ 
+\item $(\exists a.\neg\phi) \rightarrow (\neg \forall a.\phi)$
+\end{enumerate}
+
+\item Опровергните формулы $\phi\rightarrow\forall a. \phi$ и $(\exists a.\phi)\rightarrow (\forall a.\phi)$
+
+\item Докажите теорему о дедукции для исчисления предикатов:
+\begin{enumerate}
+\item Если $\Gamma, \alpha \vdash \beta\rightarrow\forall a.\gamma$, то
+$\Gamma\vdash\alpha\rightarrow\beta\rightarrow\forall a.\gamma$ (если $a$ не входит
+свободно в $\alpha$).
+\item Если $\Gamma, \alpha \vdash (\exists a.\gamma)\rightarrow\beta$, то
+$\Gamma\vdash\alpha\rightarrow(\exists a.\gamma)\rightarrow\beta$ (если $a$ не входит
+свободно в $\alpha$).
+\item Сведите всё вместе и постройте общее доказательство теоремы.
+\end{enumerate}
+
+\item Рассмотрим формулу $\alpha$ с двумя свободными переменными $a$ и $b$.
+Определите, какие из сочетаний кванторов выводятся из каких:
+\begin{enumerate}
+\item $\forall a.\forall b.\alpha$, $\forall b.\forall a.\alpha$
+\item $\exists a.\exists b.\alpha$, $\exists b.\exists a.\alpha$
+\item $\forall a.\forall b.\alpha$, $\forall a.\exists b.\alpha$, $\exists a.\forall b.\alpha$, $\exists a.\exists b.\alpha$
+\item $\forall a.\exists b.\alpha$, $\exists b.\forall a.\alpha$
+\end{enumerate}
+
+\end{enumerate}
+
 \end{document}
