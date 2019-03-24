@@ -336,7 +336,7 @@ $W_i \Vdash A_k$, если переменная $A_k$ вынуждена в ми
 Обобщим отношение вынужденности на случай произвольной формулы:
 \begin{itemize}
 \item Если $W_i \Vdash \alpha$ и $W_i \Vdash \beta$, то $W_i \Vdash \alpha\with\beta$;
-\item Если $W_i \Vdash \alpha$ и $W_i \Vdash \beta$, то $W_i \Vdash \alpha\vee\beta$;
+\item Если $W_i \Vdash \alpha$ или $W_i \Vdash \beta$, то $W_i \Vdash \alpha\vee\beta$;
 \item Если в любом мире $W_k: W_i \preceq W_k$ выполнено, что из $W_k \Vdash \alpha$ следует $W_k \Vdash \beta$, 
 то $W_i \Vdash \alpha\rightarrow\beta$;
 \item Если ни в каком мире $W_k: W_i \preceq W_k$ не выполнено $\alpha$, то $W_i \Vdash \neg\alpha$.
@@ -350,7 +350,7 @@ $W_i \Vdash A_k$, если переменная $A_k$ вынуждена в ми
 \begin{enumerate}
 \item Построим пример модели, опровергающей формулу $P \vee\neg P$
 (деревья в моделях Крипке у нас будут расти вправо):
-\begin{center}\tikz{
+	\begin{center}\tikz{
 \node at (0,0)   (A) {$W_1$};
 \node at (2,1) (B) {$W_2$};
 \node at (2,-1) (C) {$W_3$};
