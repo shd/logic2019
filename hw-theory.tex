@@ -441,4 +441,89 @@ $\Gamma\vdash\alpha\rightarrow(\exists a.\gamma)\rightarrow\beta$ (если $a$ 
 
 \end{enumerate}
 
+\section*{Домашнее задание №7: <<Исчисление предикатов>>}
+
+\begin{enumerate}
+\item Пусть дано непротиворечивое множество замкнутых формул $\Gamma$, и пусть
+дана формула $\alpha$. Покажите, что как минимум либо $\Gamma \cup \alpha$, либо
+$\Gamma \cup \neg\alpha$ непротиворечиво.
+
+\item Пусть $D$ --- предметное множество, и оно состоит из строк. Пусть $\Gamma$ --- некоторое
+полное непротиворечивое множество замкнутых бескванторных формул.
+Пусть $$\llbracket f_i (\theta_1, \theta_2, \dots \theta_k)\rrbracket = 
+\textrm{<<}f_i (\textrm{>>} ++ \llbracket \theta_1 \rrbracket ++ 
+\llbracket \theta_2 \rrbracket ++ \dots ++ \llbracket \theta_k \rrbracket ++ \textrm{<<})\textrm{>>}$$
+
+Пусть $$P_i (\theta_1, \theta_2, \dots, \theta_k) = 
+   \left\{ \begin{array}\texttt{И,}& \textrm{если } P_i (\theta_1, \theta_2, \dots, \theta_k) \in \Gamma\\
+           \texttt{Л,} & \textrm{иначе}\end{array}\right.$$
+
+Покажите тогда, что $\psi \in \Gamma$ тогда и только тогда, когда $\llbracket\psi\rrbracket = \texttt{И}$.
+Для этого:
+\begin{enumerate}
+\item покажите, что $\alpha\with\beta \in \Gamma$ тогда и только тогда, когда $\alpha\in\Gamma$ и $\beta\in\Gamma$;
+\item покажите, что $\alpha\with\beta \in \Gamma$ тогда и только тогда, когда $\alpha\in\Gamma$, либо $\beta\in\Gamma$,
+либо выполнено оба утверждения;
+\item покажите, что $\alpha\in\Gamma$ тогда и только тогда, когда $\neg\alpha\notin\Gamma$.
+\item покажите, что $\alpha\rightarrow\beta \in \Gamma$ тогда и только тогда, когда 
+либо $\neg\alpha\in\Gamma$, либо одновременно $\alpha\in\Gamma$ и $\beta\in\Gamma$.
+\item при помощи сформулированных выше вспомогательных утверждений докажите требуемое утверждение.
+\end{enumerate}
+
+\item Формализация понятий свободных переменных, свободы для подстановки, замены переменных.
+
+Рассмотрим множество $FV$ (свободных переменных) для формул:
+
+$$
+FV(\psi) = \left\{ \begin{array}{rl}
+  \bigcup_i FV(\theta_i),  &\mbox{ если $\psi$ --- $P(\theta_1,\theta_2,\dots,\theta_n)$ } \\
+  FV(\alpha) \cup FV(\beta),  &\mbox{ если $\psi$ имеет вид $\alpha\with\beta$, $\alpha\vee\beta$, $\alpha\rightarrow\beta$, $\neg \alpha$ }\\
+  FV(\varphi) \setminus \{x\},  &\mbox{ если $\alpha$ имеет вид $\forall x.\varphi$ или $\exists x.\varphi$ }
+       \end{array} \right.
+$$
+
+и для термов:
+
+$$
+FV(\theta) = \left\{ \begin{array}{rl}
+  x, &\mbox{ если 
+  \bigcup_i FV(\theta_i),  &\mbox{ если $\psi$ --- $P(\theta_1,\theta_2,\dots,\theta_n)$ } \\
+\end{array} \right.
+$$
+
+
+Рассмотрим операцию замены переменных, определим её для формул:
+
+$$
+\alpha [x := \theta] = \left\{ \begin{array}{rl}
+  \alpha, &\mbox{ если $x \notin FV(\alpha)$}\\
+  P(\theta_1 [x := \theta], \theta_2 [x := \theta], \dots \theta_k [x := \theta], &\mbox{ если $\alpha$ --- предикатный символ}\\
+  (\psi [x := \beta]) \star (\varphi [x := \beta]), &\mbox{ если $\alpha$ имеет вид $\psi\star\varphi$ }\\
+  \forall y.(\psi [x := \beta]),  &\mbox{ если $\alpha$ имеет вид $\forall y.\psi$ }
+  \exists y.(\psi [x := \beta]),  &\mbox{ если $\alpha$ имеет вид $\exists y.\psi$ }
+       \end{array} \right.
+$$
+
+и для термов:
+
+
+
+\emph{Контекстом} подстановки $\alpha [x := B]$ назовем следующую функцию от
+терма и заменяемой переменной:
+$$
+CX (A, x) = \left\{ \begin{array}{rl}
+  \emptyset, &\mbox{ если $x \notin FV(A)$ или если $A$ --- переменная } \\
+  CX (P, x) \cup CX (Q, x), &\mbox{ если $A$ имеет вид $P\ Q$ }\\
+  CX (R, x) \cup \{y\},  &\mbox{ если $A$ имеет вид $\+y.R$ }
+       \end{array} \right.
+$$
+
+\begin{enumerate}
+\item Покажите, что $x \in FV(\alpha)$ тогда и только тогда, когда $x$ входит свободно в $\alpha$.
+\item Продолжение следует...
+\end{enumerate}
+
+
+\end{enumerate}
+
 \end{document}
