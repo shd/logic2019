@@ -350,7 +350,7 @@ $W_i \Vdash A_k$, если переменная $A_k$ вынуждена в ми
 \begin{enumerate}
 \item Построим пример модели, опровергающей формулу $P \vee\neg P$
 (деревья в моделях Крипке у нас будут расти вправо):
-\begin{center}\tikz{
+	\begin{center}\tikz{
 \node at (0,0)   (A) {$W_1$};
 \node at (2,1) (B) {$W_2$};
 \node at (2,-1) (C) {$W_3$};
@@ -439,6 +439,110 @@ $\Gamma\vdash\alpha\rightarrow(\exists x.\gamma)\rightarrow\beta$ (если $x$ 
 \item $\forall x.\forall y.\alpha$, $\forall x.\exists y.\alpha$, $\exists x.\forall y.\alpha$, $\exists x.\exists y.\alpha$
 \item $\forall x.\exists y.\alpha$, $\exists y.\forall x.\alpha$
 \end{enumerate}
+
+\end{enumerate}
+
+\section*{Домашнее задание №7: <<Исчисление предикатов>>}
+
+\begin{enumerate}
+\item Пусть дано непротиворечивое множество замкнутых формул $\Gamma$, и пусть
+дана формула $\alpha$. Покажите, что как минимум либо $\Gamma \cup \{\alpha\}$, либо
+$\Gamma \cup \{\neg\alpha\}$ непротиворечиво.
+
+\item Пусть $D$ --- предметное множество, и оно состоит из строк. Пусть $\Gamma$ --- некоторое
+полное непротиворечивое множество замкнутых бескванторных формул.
+Пусть $$\llbracket f_i (\theta_1, \theta_2, \dots \theta_k)\rrbracket = 
+\textrm{<<}f_i (\textrm{>> ++} \llbracket \theta_1 \rrbracket \textrm{++}
+\llbracket \theta_2 \rrbracket \textrm{++} \dots \textrm{++} \llbracket \theta_k \rrbracket 
+\textrm{++ <<})\textrm{>>}$$
+
+Пусть $$P_i (\theta_1, \theta_2, \dots, \theta_k) = 
+   \left\{ \begin{array}{ll}\texttt{И,}& \textrm{если } P_i (\theta_1, \theta_2, \dots, \theta_k) \in \Gamma\\
+           \texttt{Л,} & \textrm{иначе}\end{array}\right.$$
+
+Покажите тогда, что $\psi \in \Gamma$ тогда и только тогда, когда $\llbracket\psi\rrbracket = \texttt{И}$.
+Для этого:
+\begin{enumerate}
+\item покажите, что $\alpha\with\beta \in \Gamma$ тогда и только тогда, когда $\alpha\in\Gamma$ и $\beta\in\Gamma$;
+\item покажите, что $\alpha\vee\beta \in \Gamma$ тогда и только тогда, когда $\alpha\in\Gamma$, либо $\beta\in\Gamma$,
+либо выполнено оба утверждения;
+\item покажите, что $\alpha\in\Gamma$ тогда и только тогда, когда $\neg\alpha\notin\Gamma$.
+\item покажите, что $\alpha\rightarrow\beta \in \Gamma$ тогда и только тогда, когда 
+либо $\neg\alpha\in\Gamma$, либо одновременно $\alpha\in\Gamma$ и $\beta\in\Gamma$.
+\item при помощи сформулированных выше вспомогательных утверждений докажите требуемое утверждение.
+\end{enumerate}
+
+\item Формализация понятий свободных переменных, свободы для подстановки, замены переменных.
+
+Рассмотрим множество $FV$ (свободных переменных) для формул:
+
+$$
+FV(\psi) = \left\{ \begin{array}{rl}
+  \bigcup_i FV(\theta_i),  &\mbox{ если $\psi\equiv P(\theta_1,\theta_2,\dots,\theta_n)$ } \\
+  FV(\alpha) \cup FV(\beta),  &\mbox{ если $\psi\equiv\alpha\star\beta$ }\\
+  FV(\alpha),  &\mbox{ если $\psi\equiv\neg\alpha$ }\\
+  FV(\varphi) \setminus \{x\},  &\mbox{ если $\alpha$ имеет вид $\forall x.\varphi$ или $\exists x.\varphi$ }
+       \end{array} \right.
+$$
+
+и для термов:
+
+$$
+FV(\theta) = \left\{ \begin{array}{rl}
+  \{x\}, &\mbox{ если $\theta\equiv x$ }\\
+  \bigcup_i FV(\theta_i),  &\mbox{ если $\theta \equiv f(\theta_1,\theta_2,\dots,\theta_n)$ } \\
+\end{array} \right.
+$$
+
+
+Рассмотрим операцию замены переменных, определим её для формул:
+
+$$
+\alpha [x := \theta] = \left\{ \begin{array}{ll}
+  \alpha, &\mbox{ если $x \notin FV(\alpha)$}\\
+  P(\theta_1 [x := \theta], \theta_2 [x := \theta], \dots, \theta_k [x := \theta]), &\mbox{ если $\alpha\equiv P(\theta_1, \theta_2, \dots,\theta_k)$}\\
+  (\psi [x := \beta]) \star (\varphi [x := \beta]), &\mbox{ если $\alpha\equiv\psi\star\varphi$ }\\
+  \neg(\psi [x := \beta]), &\mbox{ если $\alpha\equiv\neg\psi$ }\\
+  \forall y.(\psi [x := \beta]),  &\mbox{ если $\alpha\equiv\forall y.\psi$ }\\
+  \exists y.(\psi [x := \beta]),  &\mbox{ если $\alpha\equiv\exists y.\psi$ }
+       \end{array} \right.
+$$
+
+и для термов:
+
+$$
+\rho [x := \theta] = \left\{ \begin{array}{ll}
+  \rho, &\mbox{ если $x \notin FV(\rho)$ }\\
+  \theta, &\mbox{ если $\rho\equiv x$}\\
+  f (\rho_1 [x := \theta], \rho_2 [x := \theta], \dots, \rho_k [x := \theta]), &\mbox{ если $\rho\equiv f(\rho_1,\rho_2,\dots,\rho_k)$ }
+       \end{array} \right.
+$$
+
+\emph{Контекстом} подстановки $\alpha [x := B]$ назовем следующую функцию от
+терма и заменяемой переменной:
+$$
+CX (\alpha, x) = \left\{ \begin{array}{ll}
+  \varnothing, &\mbox{ если $x \notin FV(\alpha)$ } \\
+  CX (\psi, x) \cup CX (\varphi, x), &\mbox{ если $x \in FV(\alpha)$ и  $\alpha\equiv\psi\star\varphi$ }\\
+  CX (\psi, x), &\mbox{ если $x \in FV(\alpha)$ и  $\alpha\equiv\neg\psi$ }\\
+  CX (\psi, x) \cup \{y\},  &\mbox{ если $x \in FV(\alpha)$ и либо $\alpha\equiv\forall y.\psi$, либо $\alpha\equiv\exists y.\psi$ }
+       \end{array} \right.
+$$
+
+\begin{enumerate}
+\item Покажите, что $x \in FV(\alpha)$ тогда и только тогда, когда $x$ входит свободно в $\alpha$ 
+(\emph{подсказка:} доказательство ведётся индукцией по длине формулы $\alpha$);
+\item Покажите, что $CX (\alpha, x) \cap FV(\beta) = \varnothing$ тогда и только тогда,
+когда $\beta$ свободна для подстановки вместо $x$ в $\alpha$;
+\item Покажите на основании данных определений, что если $x \notin FV(\alpha)$, то
+при любом множестве $D$ и любых оценках символов и переменных из 
+$\llbracket \beta\rightarrow\alpha \rrbracket = \texttt{И}$ следует 
+$\llbracket \exists x.\beta\rightarrow\alpha\rrbracket = \texttt{И}$;
+\item Покажите на основании данных определений, что если $CX (\alpha, x) \cap FV(\beta) = \varnothing$, 
+то при любом множестве $D$ и любых оценках символов и переменных 
+$\llbracket \alpha[x:=\beta]\rightarrow\exists x.\alpha\rrbracket = \texttt{И}$. 
+\end{enumerate}
+
 
 \end{enumerate}
 
