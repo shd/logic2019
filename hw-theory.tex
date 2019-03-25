@@ -518,8 +518,8 @@ $$
        \end{array} \right.
 $$
 
-\emph{Контекстом} подстановки $\alpha [x := B]$ назовем следующую функцию от
-терма и заменяемой переменной:
+\emph{Контекстом} подстановки $\alpha [x := \theta]$ назовем следующую функцию от
+формулы и заменяемой переменной:
 $$
 CX (\alpha, x) = \left\{ \begin{array}{ll}
   \varnothing, &\mbox{ если $x \notin FV(\alpha)$ } \\
@@ -532,15 +532,15 @@ $$
 \begin{enumerate}
 \item Покажите, что $x \in FV(\alpha)$ тогда и только тогда, когда $x$ входит свободно в $\alpha$ 
 (\emph{подсказка:} доказательство ведётся индукцией по длине формулы $\alpha$);
-\item Покажите, что $CX (\alpha, x) \cap FV(\beta) = \varnothing$ тогда и только тогда,
-когда $\beta$ свободна для подстановки вместо $x$ в $\alpha$;
+\item Покажите, что $CX (\alpha, x) \cap FV(\theta) = \varnothing$ тогда и только тогда,
+когда $\theta$ свободна для подстановки вместо $x$ в $\alpha$;
 \item Покажите на основании данных определений, что если $x \notin FV(\alpha)$, то
 при любом множестве $D$ и любых оценках символов и переменных из 
 $\llbracket \beta\rightarrow\alpha \rrbracket = \texttt{И}$ следует 
 $\llbracket \exists x.\beta\rightarrow\alpha\rrbracket = \texttt{И}$;
-\item Покажите на основании данных определений, что если $CX (\alpha, x) \cap FV(\beta) = \varnothing$, 
+\item Покажите на основании данных определений, что если $CX (\alpha, x) \cap FV(\theta) = \varnothing$, 
 то при любом множестве $D$ и любых оценках символов и переменных 
-$\llbracket \alpha[x:=\beta]\rightarrow\exists x.\alpha\rrbracket = \texttt{И}$. 
+$\llbracket \alpha[x:=\theta]\rightarrow\exists x.\alpha\rrbracket = \texttt{И}$. 
 \end{enumerate}
 
 
