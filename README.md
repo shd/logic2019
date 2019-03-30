@@ -4,6 +4,7 @@
 + [Конспект](https://github.com/shd/logic2019/blob/master/conspect.pdf)
 + [Конспект 2011 года](https://github.com/shd/logic2011/blob/master/conspect.pdf)
 + [Теоретические домашние задания](https://github.com/shd/logic2019/blob/master/hw-theory.pdf)
++ [Вопросы к коллоквиуму 2-3-4 апреля](https://github.com/shd/logic2019/blob/master/colloq.pdf)
 
 + [Репозиторий: описание и образцы решения 0-й практической задачи](https://github.com/itegulov/hw0-reference-solutions)
 + [Краткая инструкция по утилите make](https://github.com/shd/logic2018/blob/master/make.pdf)
