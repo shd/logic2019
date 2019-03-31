@@ -543,6 +543,64 @@ $\llbracket (\exists x.\beta)\rightarrow\alpha\rrbracket = \texttt{И}$;
 $\llbracket \alpha[x:=\theta]\rightarrow\exists x.\alpha\rrbracket = \texttt{И}$. 
 \end{enumerate}
 
+\end{enumerate}
+
+\section*{Домашнее задание №8: <<Предварённая форма>>}
+
+В силу значительного объёма данного задания, часть пунктов задания не будет раскрыта
+(будет сформулирована по аналогии) — эти пункты при ответе могут раскрываться на большое
+количество отдельных подпунктов, каждый из которых оценивается независимо.
+
+\begin{enumerate}
+\item Научимся выносить квантор всеобщности <<наружу>>:
+\begin{enumerate}
+\item Покажите, что если $x$ не входит свободно в $\alpha$, то
+$$
+\vdash(\alpha \vee \forall x.\beta) \rightarrow (\forall x.\alpha\vee\beta)\quad
+\mbox{и}\quad
+\vdash((\forall x.\beta)\vee\alpha) \rightarrow (\forall x.\beta\vee\alpha)\quad
+$$
+\item Покажите, что $$\vdash((\forall x.\alpha) \vee (\forall y.\beta)) \rightarrow \forall p.\forall q.\alpha[x:=p]\vee\beta[y := q]$$
+где $p$ и $q$ --- свежие переменные, не входящие в формулу. Заметим, что в частном случае $x$ может совпадать с $y$.
+\item Докажите аналогичные утверждения для $\with$.
+\item Как будут сформулированы аналогичные утверждения для $\rightarrow$ и $\neg$? Сформулируйте и докажите их.
+\end{enumerate}
+
+\item Научимся вносить квантор всеобщности <<внутрь>>:
+\begin{enumerate}
+\item Покажите, что если $x$ не входит свободно в $\alpha$, то
+$$
+\vdash (\forall x.\alpha\vee\beta)\rightarrow(\alpha \vee \forall x.\beta)\quad
+\mbox{и}\quad
+\vdash (\forall x.\beta\vee\alpha)\rightarrow((\forall x.\beta)\vee\alpha)\quad
+$$
+
+\item Покажите, что если $p$ не входит свободно в $\beta$ и $q$ не входит свободно в $\alpha$, то
+$$\vdash(\forall p.\forall q.\alpha\vee\beta) \rightarrow (\forall x.\alpha[p := x]) \vee (\forall y.\beta[q := y])$$
+при условии, что $x$ свободно для подстановки вместо $p$ в $\alpha$ и $y$ свободно для подстановки вместо $q$ в $\beta$.
+\item Докажите аналогичные утверждения для $\with$.
+\item Как будут сформулированы аналогичные утверждения для $\rightarrow$ и $\neg$? Сформулируйте и докажите их.
+\end{enumerate}
+
+\item Сформулируйте и докажите аналогичные предыдущим пунктам утверждения для квантора существования.
+
+\item Научимся работать со спрятанными глубоко кванторами. Пусть $\vdash\alpha\rightarrow\beta$, тогда:
+\begin{enumerate}
+\item Докажите: $$\vdash\psi\vee\alpha \rightarrow \psi\vee\beta\quad\vdash\psi\with\alpha \rightarrow \psi\with\beta\quad
+\vdash(\psi\rightarrow\alpha) \rightarrow (\psi\rightarrow\beta)\quad\vdash(\beta\rightarrow\psi) \rightarrow (\alpha\rightarrow\psi)$$
+\item Сформулируйте и докажите аналогичное свойство для отрицания.
+\item Докажите $\vdash(\forall x.\alpha)\rightarrow(\forall x.\beta)$. 
+Надо ли наложить на формулы $\alpha$ и $\beta$ какие-либо ограничения?
+\item Докажите $\vdash(\exists x.\alpha)\rightarrow(\exists x.\beta)$. 
+Надо ли наложить на формулы $\alpha$ и $\beta$ какие-либо ограничения?
+\end{enumerate}
+
+\item Опираясь на доказанные выше леммы, докажите, что
+если $\alpha$ --- формула, то для неё найдётся такая формула $\beta$ с поверхностными кванторами, что:
+\begin{enumerate}
+\item $\vdash\alpha\rightarrow\beta$
+\item $\vdash\beta\rightarrow\alpha$
+\end{enumerate}
 
 \end{enumerate}
 
