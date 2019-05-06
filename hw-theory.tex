@@ -11,6 +11,15 @@
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
 \usepackage{proof}
 \usepackage{tikz}
+
+\makeatletter
+\newcommand{\dotminus}{\mathbin{\text{\@dotminus}}}
+
+\newcommand{\@dotminus}{%
+  \ooalign{\hidewidth\raise1ex\hbox{.}\hidewidth\cr$\m@th-$\cr}%
+}
+\makeatother
+
 \usetikzlibrary{arrows,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
 \begin{document}
 
@@ -646,6 +655,109 @@ $$\vdash(\forall p.\forall q.\alpha\vee\beta) \rightarrow (\forall x.\alpha[p :=
 (напомним, что данная запись означает, что головка находится на первом 
 символе строки $w$, а слева от неё --- строка $s$, записанная в обратном
 порядке), то тогда $\vdash P_x(s,w)$.
+
+\end{enumerate}
+
+\section*{Домашнее задание №10: <<Аксиоматика Пеано, рекурсивные функции>>}
+
+\begin{enumerate}
+
+\item Возьмём следующие определения сложения и умножения, применяемые в аксиоматике Пеано.
+{\bfseries Важно:} в отличие от определений с лекции, мы будем проводить разбор второго аргумента.
+
+%\begin{tabular}{cc}
+$$a + b = \left\{\begin{array}{ll}
+a, & b = 0\\
+(a + x)', & b = x'
+\end{array}\right.$$
+%&
+$$a \cdot b = \left\{\begin{array}{ll}
+0, & b = 0\\
+a + (a \cdot x), & b = x'
+\end{array}\right.$$
+%&
+$$a^b = \left\{\begin{array}{ll}
+1, & b = 0\\
+a \cdot (a ^ x), & b = x'
+\end{array}\right.$$
+%\end{tabular}
+
+Докажите следующие утверждения:
+\begin{enumerate}
+\item $a + b = b + a$
+\item $a + (b + c) = (a+b) + c$
+\item $a \cdot 1 = a$ (определим $1$ как $0'$)
+\item $a \cdot b = b \cdot a$
+\item $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+\item $a \cdot (b + c) = a \cdot b + a \cdot c$
+\item $2 \cdot a = a + a$
+\item Пусть $a \le b$ означает, что найдётся такой $c$, что $a + c \le b$.
+Покажите, что если $a \le b$, то $a + c \le b + c$
+\item Покажите, что если $a \le b$ и $c \le d$, то $a+c \le b+d$
+\item Покажите, что $a^b \ne b^a$
+\item Покажите, что $a^{b^c} \ne (a^b)^c$
+\item При каких $a$ и $b$ выполнено $a\cdot b > a + b$? Докажите полученное утверждение.
+\end{enumerate}
+
+\item Докажите следующие утверждения в формальной арифметике:
+
+\begin{enumerate}
+\item $\vdash p = p$
+\item $\vdash 0 + a = a$
+\item $\vdash 2 + 2 = 4$
+\item $\vdash 2 \cdot 2 = 4$
+\item $\vdash a = b \rightarrow b = a$
+\item $\vdash a = b \rightarrow a + 1 = b + 1$
+\item $\vdash a = b \rightarrow a + c = b + c$
+\end{enumerate}
+
+\item Определим новое обозначение: будем писать $x \le y$ вместо $\exists a.x + a = y$
+(и воспринимать это новое обозначение как своего рода макроподстановку).
+Также, введём обозначение для записи натуральных чисел в формальной арифметике:
+$$\overline{n} = \left\{\begin{array}{ll}0,& n=0 \\ (\overline{n-1})',& n > 0\end{array}\right.$$
+Естественно, данные обозначения целиком принадлежат мета-языку.
+Покажите следующие утверждения:
+
+\begin{enumerate}
+\item $\vdash 1 \le 2$
+\item $\vdash a = b \rightarrow a \le b$
+\item $\vdash a \le b \rightarrow a' \le b'$
+\item $\vdash a \le b \rightarrow \forall c.a + c \le b + c$
+\item $\vdash a \le b \vee b \le a$
+\item Обозначим за $\phi_n(x)$ формулу $x = 0 \vee x = 0' \vee x = 0'' \vee \dots \vee x = \overline{n}$.
+Покажите тогда, что при любом натуральном $n$ выполнено $\vdash a \le \overline{n} \rightarrow \phi_n(a)$
+\item При любом натуральном $n$ выполнено $\vdash \phi_n(a) \rightarrow a \le \overline{n}$
+\end{enumerate}
+
+\item Покажите, что следующие функции являются примитивно-рекурсивными:
+\begin{enumerate}
+\item $x + y$
+\item $2x$
+\item $x^2$
+\item $x \cdot y$
+\item $x^y$
+\end{enumerate}
+
+\item Введём операцию <<ограниченное вычитание>>:
+$$a \dotminus b = \left\{\begin{array}{ll}
+0, & b > a\\
+a - b, & \mbox{иначе}
+\end{array}\right.$$
+
+Также определим деление с остатком: пусть даны натуральные числа $a$ и $b$ ($b > 0$). 
+Известно, что найдутся два числа $k$ и $x$ ($0 < x \le b$), такие, что 
+$a = k \cdot b + x$. Обозначим эти числа так: $k = a / b$ (частное) и $x = a \% b$ (остаток).
+
+Тогда покажите, что следующие функции являются примитивно-рекурсивными:
+
+\begin{enumerate}
+\item $x \dotminus y$
+\item $x / y$
+\item $x \% y$
+\item $\max(x,y)$
+\item <<частичный логарифм>>: $\textrm{plog}_x(a) = \max\{t : a \% (x^t) = 0\}$
+\item Функция, вычисляющая $n$-е простое число
+\end{enumerate}
 
 \end{enumerate}
 
