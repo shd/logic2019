@@ -11,6 +11,15 @@
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
 \usepackage{proof}
 \usepackage{tikz}
+
+\makeatletter
+\newcommand{\dotminus}{\mathbin{\text{\@dotminus}}}
+
+\newcommand{\@dotminus}{%
+  \ooalign{\hidewidth\raise1ex\hbox{.}\hidewidth\cr$\m@th-$\cr}%
+}
+\makeatother
+
 \usetikzlibrary{arrows,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks}
 \begin{document}
 
@@ -501,10 +510,10 @@ $$
 \alpha [x := \theta] = \left\{ \begin{array}{ll}
   \alpha, &\mbox{ если $x \notin FV(\alpha)$}\\
   P(\theta_1 [x := \theta], \theta_2 [x := \theta], \dots, \theta_k [x := \theta]), &\mbox{ если $\alpha\equiv P(\theta_1, \theta_2, \dots,\theta_k)$}\\
-  (\psi [x := \beta]) \star (\varphi [x := \beta]), &\mbox{ если $\alpha\equiv\psi\star\varphi$ }\\
-  \neg(\psi [x := \beta]), &\mbox{ если $\alpha\equiv\neg\psi$ }\\
-  \forall y.(\psi [x := \beta]),  &\mbox{ если $\alpha\equiv\forall y.\psi$ }\\
-  \exists y.(\psi [x := \beta]),  &\mbox{ если $\alpha\equiv\exists y.\psi$ }
+  (\psi [x := \theta]) \star (\varphi [x := \theta]), &\mbox{ если $\alpha\equiv\psi\star\varphi$ }\\
+  \neg(\psi [x := \theta]), &\mbox{ если $\alpha\equiv\neg\psi$ }\\
+  \forall y.(\psi [x := \theta]),  &\mbox{ если $\alpha\equiv\forall y.\psi$ }\\
+  \exists y.(\psi [x := \theta]),  &\mbox{ если $\alpha\equiv\exists y.\psi$ }
        \end{array} \right.
 $$
 
@@ -518,8 +527,8 @@ $$
        \end{array} \right.
 $$
 
-\emph{Контекстом} подстановки $\alpha [x := B]$ назовем следующую функцию от
-терма и заменяемой переменной:
+\emph{Контекстом} подстановки $\alpha [x := \theta]$ назовем следующую функцию от
+формулы и заменяемой переменной:
 $$
 CX (\alpha, x) = \left\{ \begin{array}{ll}
   \varnothing, &\mbox{ если $x \notin FV(\alpha)$ } \\
@@ -532,17 +541,223 @@ $$
 \begin{enumerate}
 \item Покажите, что $x \in FV(\alpha)$ тогда и только тогда, когда $x$ входит свободно в $\alpha$ 
 (\emph{подсказка:} доказательство ведётся индукцией по длине формулы $\alpha$);
-\item Покажите, что $CX (\alpha, x) \cap FV(\beta) = \varnothing$ тогда и только тогда,
-когда $\beta$ свободна для подстановки вместо $x$ в $\alpha$;
+\item Покажите, что $CX (\alpha, x) \cap FV(\theta) = \varnothing$ тогда и только тогда,
+когда $\theta$ свободна для подстановки вместо $x$ в $\alpha$;
 \item Покажите на основании данных определений, что если $x \notin FV(\alpha)$, то
 при любом множестве $D$ и любых оценках символов и переменных из 
 $\llbracket \beta\rightarrow\alpha \rrbracket = \texttt{И}$ следует 
-$\llbracket \exists x.\beta\rightarrow\alpha\rrbracket = \texttt{И}$;
-\item Покажите на основании данных определений, что если $CX (\alpha, x) \cap FV(\beta) = \varnothing$, 
+$\llbracket (\exists x.\beta)\rightarrow\alpha\rrbracket = \texttt{И}$;
+\item Покажите на основании данных определений, что если $CX (\alpha, x) \cap FV(\theta) = \varnothing$, 
 то при любом множестве $D$ и любых оценках символов и переменных 
-$\llbracket \alpha[x:=\beta]\rightarrow\exists x.\alpha\rrbracket = \texttt{И}$. 
+$\llbracket \alpha[x:=\theta]\rightarrow\exists x.\alpha\rrbracket = \texttt{И}$. 
 \end{enumerate}
 
+\end{enumerate}
+
+\section*{Домашнее задание №8: <<Предварённая форма>>}
+
+В силу значительного объёма данного задания, часть пунктов задания не будет раскрыта
+(будет сформулирована по аналогии) — эти пункты при ответе могут раскрываться на большое
+количество отдельных подпунктов, каждый из которых оценивается независимо.
+
+\begin{enumerate}
+\item Научимся выносить квантор всеобщности <<наружу>>:
+\begin{enumerate}
+\item Покажите, что если $x$ не входит свободно в $\alpha$, то
+$$
+\vdash(\alpha \vee \forall x.\beta) \rightarrow (\forall x.\alpha\vee\beta)\quad
+\mbox{и}\quad
+\vdash((\forall x.\beta)\vee\alpha) \rightarrow (\forall x.\beta\vee\alpha)\quad
+$$
+\item Покажите, что $$\vdash((\forall x.\alpha) \vee (\forall y.\beta)) \rightarrow \forall p.\forall q.\alpha[x:=p]\vee\beta[y := q]$$
+где $p$ и $q$ --- свежие переменные, не входящие в формулу. Заметим, что в частном случае $x$ может совпадать с $y$.
+\item Докажите аналогичные утверждения для $\with$.
+\item Как будут сформулированы аналогичные утверждения для $\rightarrow$ и $\neg$? Сформулируйте и докажите их.
+\end{enumerate}
+
+\item Научимся вносить квантор всеобщности <<внутрь>>:
+\begin{enumerate}
+\item Покажите, что если $x$ не входит свободно в $\alpha$, то
+$$
+\vdash (\forall x.\alpha\vee\beta)\rightarrow(\alpha \vee \forall x.\beta)\quad
+\mbox{и}\quad
+\vdash (\forall x.\beta\vee\alpha)\rightarrow((\forall x.\beta)\vee\alpha)\quad
+$$
+
+\item Покажите, что если $p$ не входит свободно в $\beta$ и $q$ не входит свободно в $\alpha$, то
+$$\vdash(\forall p.\forall q.\alpha\vee\beta) \rightarrow (\forall x.\alpha[p := x]) \vee (\forall y.\beta[q := y])$$
+при условии, что $x$ свободно для подстановки вместо $p$ в $\alpha$ и $y$ свободно для подстановки вместо $q$ в $\beta$.
+\item Докажите аналогичные утверждения для $\with$.
+\item Как будут сформулированы аналогичные утверждения для $\rightarrow$ и $\neg$? Сформулируйте и докажите их.
+\end{enumerate}
+
+\item Сформулируйте и докажите аналогичные предыдущим пунктам утверждения для квантора существования.
+
+\item Научимся работать со спрятанными глубоко кванторами. Пусть $\vdash\alpha\rightarrow\beta$, тогда:
+\begin{enumerate}
+\item Докажите: $$\vdash\psi\vee\alpha \rightarrow \psi\vee\beta\quad\vdash\psi\with\alpha \rightarrow \psi\with\beta\quad
+\vdash(\psi\rightarrow\alpha) \rightarrow (\psi\rightarrow\beta)\quad\vdash(\beta\rightarrow\psi) \rightarrow (\alpha\rightarrow\psi)$$
+\item Сформулируйте и докажите аналогичное свойство для отрицания.
+\item Докажите $\vdash(\forall x.\alpha)\rightarrow(\forall x.\beta)$. 
+Надо ли наложить на формулы $\alpha$ и $\beta$ какие-либо ограничения?
+\item Докажите $\vdash(\exists x.\alpha)\rightarrow(\exists x.\beta)$. 
+Надо ли наложить на формулы $\alpha$ и $\beta$ какие-либо ограничения?
+\end{enumerate}
+
+\item Опираясь на доказанные выше леммы, докажите, что
+если $\alpha$ --- формула, то для неё найдётся такая формула $\beta$ с поверхностными кванторами, что:
+\begin{enumerate}
+\item $\vdash\alpha\rightarrow\beta$
+\item $\vdash\beta\rightarrow\alpha$
+\end{enumerate}
+
+\end{enumerate}
+
+\section*{Домашнее задание №9: <<Машина Тьюринга, неразрешимость исчисления предикатов>>}
+
+\begin{enumerate}
+\item Давайте договоримся, что указывая внешний алфавит, мы не будем упоминать 
+<<пустой>> символ $\varepsilon$, будем считать, что он всегда есть в алфавите.
+Постройте машины Тьюринга, вычисляющие следующие фунцкии:
+
+\begin{enumerate}
+\item заменяющую ведущие нули числа в двоичной системе счисления на $\varepsilon$ 
+(в алфавите $A = \{0,1\}$);
+\item в числе из алфавита $\{0,1,2\}$ вырезающую все нули, заполняя образующиеся пустоты 
+сдвигая число влево: например, из числа \verb!20001010232! должно получиться \verb!211232!;
+\item разворачивающую строку в алфавите $\{a,b\}$ в обратном порядке:
+из строки \verb!aaabababa! должна получиться строка \verb!abababaaa!.
+\end{enumerate}
+
+\item Рассмотрим алфавит $A$, множество всех слов в этом алфавите $A^*$ и некоторый
+язык $L \subseteq A^*$. Напомним, что мы будем называть машину Тьюринга разрешающей язык $L$,
+если на каждом слове $w \in A^*$ машина заканчивает работу в допускающем ($s_A$) или 
+отвергающем ($S_D$) состоянии, причём машина переходит в допускающее состояние $s_A$ тогда 
+и только тогда, когда $w \in L$.
+Постройте машины Тьюринга, разрешающие следующие языки:
+
+\begin{enumerate}
+\item язык всех ненулевых двоичных чисел ($A = \{0,1\}$);
+\item язык всех чётных четверичных чисел ($A = \{0,1,2,3\}$);
+\item язык всех десятичных чисел, делящихся на 3 ($A = \{0,1,2,3,4,5,6,7,8,9\}$);
+\item язык всех правильных скобочных последовательностей ($A = \{(,)\}$);
+\item язык всех корректно заданных машин Тьюринга (придумайте сами представление
+для машины Тьюринга);
+\item язык всех машин Тьюринга, имеющих не меньше трёх состояний;
+\item язык всех машин Тьюринга, завершающих работу не более чем за пять переходов.
+\end{enumerate}
+
+\item Постройте логические формулы, кодирующие машины Тьюринга
+из первых двух подпунктов предыдущей задачи в исчислении предикатов.
+
+\item Формализуйте доказательство того, что если машина Тьюринга достигает
+состояния $P_x$ при наличии на ленте последовательности $\langle s, w \rangle$
+(напомним, что данная запись означает, что головка находится на первом 
+символе строки $w$, а слева от неё --- строка $s$, записанная в обратном
+порядке), то тогда $\vdash P_x(s,w)$.
+
+\end{enumerate}
+
+\section*{Домашнее задание №10: <<Аксиоматика Пеано, рекурсивные функции>>}
+
+\begin{enumerate}
+
+\item Возьмём следующие определения сложения и умножения, применяемые в аксиоматике Пеано.
+{\bfseries Важно:} в отличие от определений с лекции, мы будем проводить разбор второго аргумента.
+
+%\begin{tabular}{cc}
+$$a + b = \left\{\begin{array}{ll}
+a, & b = 0\\
+(a + x)', & b = x'
+\end{array}\right.$$
+%&
+$$a \cdot b = \left\{\begin{array}{ll}
+0, & b = 0\\
+a + (a \cdot x), & b = x'
+\end{array}\right.$$
+%&
+$$a^b = \left\{\begin{array}{ll}
+1, & b = 0\\
+a \cdot (a ^ x), & b = x'
+\end{array}\right.$$
+%\end{tabular}
+
+Докажите следующие утверждения:
+\begin{enumerate}
+\item $a + b = b + a$
+\item $a + (b + c) = (a+b) + c$
+\item $a \cdot 1 = a$ (определим $1$ как $0'$)
+\item $a \cdot b = b \cdot a$
+\item $a \cdot (b \cdot c) = (a \cdot b) \cdot c$
+\item $a \cdot (b + c) = a \cdot b + a \cdot c$
+\item $2 \cdot a = a + a$
+\item Пусть $a \le b$ означает, что найдётся такой $c$, что $a + c \le b$.
+Покажите, что если $a \le b$, то $a + c \le b + c$
+\item Покажите, что если $a \le b$ и $c \le d$, то $a+c \le b+d$
+\item Покажите, что $a^b \ne b^a$
+\item Покажите, что $a^{b^c} \ne (a^b)^c$
+\item При каких $a$ и $b$ выполнено $a\cdot b > a + b$? Докажите полученное утверждение.
+\end{enumerate}
+
+\item Докажите следующие утверждения в формальной арифметике:
+
+\begin{enumerate}
+\item $\vdash p = p$
+\item $\vdash 0 + a = a$
+\item $\vdash 2 + 2 = 4$
+\item $\vdash 2 \cdot 2 = 4$
+\item $\vdash a = b \rightarrow b = a$
+\item $\vdash a = b \rightarrow a + 1 = b + 1$
+\item $\vdash a = b \rightarrow a + c = b + c$
+\end{enumerate}
+
+\item Определим новое обозначение: будем писать $x \le y$ вместо $\exists a.x + a = y$
+(и воспринимать это новое обозначение как своего рода макроподстановку).
+Также, введём обозначение для записи натуральных чисел в формальной арифметике:
+$$\overline{n} = \left\{\begin{array}{ll}0,& n=0 \\ (\overline{n-1})',& n > 0\end{array}\right.$$
+Естественно, данные обозначения целиком принадлежат мета-языку.
+Покажите следующие утверждения:
+
+\begin{enumerate}
+\item $\vdash 1 \le 2$
+\item $\vdash a = b \rightarrow a \le b$
+\item $\vdash a \le b \rightarrow a' \le b'$
+\item $\vdash a \le b \rightarrow \forall c.a + c \le b + c$
+\item $\vdash a \le b \vee b \le a$
+\item Обозначим за $\phi_n(x)$ формулу $x = 0 \vee x = 0' \vee x = 0'' \vee \dots \vee x = \overline{n}$.
+Покажите тогда, что при любом натуральном $n$ выполнено $\vdash a \le \overline{n} \rightarrow \phi_n(a)$
+\item При любом натуральном $n$ выполнено $\vdash \phi_n(a) \rightarrow a \le \overline{n}$
+\end{enumerate}
+
+\item Покажите, что следующие функции являются примитивно-рекурсивными:
+\begin{enumerate}
+\item $x + y$
+\item $2x$
+\item $x^2$
+\item $x \cdot y$
+\item $x^y$
+\end{enumerate}
+
+\item Введём операцию <<ограниченное вычитание>>:
+$$a \dotminus b = \left\{\begin{array}{ll}
+0, & b > a\\
+a - b, & \mbox{иначе}
+\end{array}\right.$$
+
+Также определим деление с остатком: пусть даны натуральные числа $a$ и $b$ ($b > 0$). 
+Известно, что найдутся два числа $k$ и $x$ ($0 < x \le b$), такие, что 
+$a = k \cdot b + x$. Обозначим эти числа так: $k = a / b$ (частное) и $x = a \% b$ (остаток).
+
+Тогда покажите, что следующие функции являются примитивно-рекурсивными:
+
+\begin{enumerate}
+\item $x \dotminus y$
+\item $x / y$
+\item $x \% y$
+\item $\max(x,y)$
+\item <<частичный логарифм>>: $\textrm{plog}_x(a) = \max\{t : a \% (x^t) = 0\}$
+\item Функция, вычисляющая $n$-е простое число
+\end{enumerate}
 
 \end{enumerate}
 
