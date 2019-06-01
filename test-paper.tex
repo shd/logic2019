@@ -1,0 +1,59 @@
+\documentclass[11pt,a4paper,oneside]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage[top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+\usepackage{amssymb}
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{center}
+{\large\scshape\bfseries Контрольная работа по математической логике}\\
+ИТМО, группы M3234--M3239, весна 2019 г.\\
+\itshape Вариант I
+\end{center}
+
+%\vspace{0.3cm}
+
+\begin{enumerate}
+\item Покажите, что при любых предикатах $P$, $Q$ и $R$ выполнено
+$\vdash \forall x.(P(x)\rightarrow Q(x))\vee(Q(x)\rightarrow R(x))\vee(R(x)\rightarrow P(x))$ 
+\item Покажите в аксиоматике Пеано, что $(a+b)^2 = a^2 + 2ab +b^2$. Считайте леммы про ассоциативность и коммутативность
+сложения и умножения доказанными.
+\item Покажите, что $\vdash \exists x.0+x=x+0$ (приведите полное доказательство).
+\item Покажите, что $\vdash \forall x.\exists y.\neg 3\cdot x = 4\cdot y$ 
+\item Постройте примитивно-рекурсивную функцию $len(s)$, вычисляющую длину строки $s$ в Гёделевой нумерации.
+Функции для сложения, умножения, ограниченного вычитания и деления с остатком считайте заданными.
+\item Покажите, что для любой формулы $\beta(x)$ найдётся такая формула $\alpha$, 
+что $\vdash\alpha\rightarrow\beta(\alpha)$. Указание: используйте формулу $\forall a.\sigma(b,b,a)\rightarrow\beta(a)$,
+где $\sigma(p,q,r)$ доказуема тогда и только тогда, когда $r$ --- результат замены всех свободных
+вхождений переменной $x$ в формуле $p$ на формулу $q$: $\rho = \pi[x := \psi]$, где
+$\ulcorner\rho\urcorner = r$, $\ulcorner\pi\urcorner = p$, $\ulcorner\psi\urcorner = q$.
+\item Приведите пример $\omega$-противоречивой, но непротиворечивой теории.
+\end{enumerate}
+
+\vspace{3cm}
+\begin{center}
+{\large\scshape\bfseries Контрольная работа по математической логике}\\
+ИТМО, группы M3234--M3239, весна 2019 г.\\
+\itshape Вариант II
+\end{center}
+
+\begin{enumerate}
+\item Покажите, что при любых предикатах $P$ и $Q$ выполнено
+$\vdash \forall x.((P(x)\rightarrow Q(x))\rightarrow P(x))\rightarrow P(x)$ 
+\item Покажите в аксиоматике Пеано, что $(a+b)\cdot (a-b) = a^2 - b^2$. Считайте леммы про ассоциативность и коммутативность
+сложения и умножения доказанными.
+\item Покажите, что $\vdash \exists x.0\cdot x=x \cdot 0$ (приведите полное доказательство).
+\item Покажите, что $\vdash \forall x.\exists y.\neg x + y = 3 \cdot x$ 
+\item Постройте функцию, возвращающую символ, стоящий в позиции $n$ в строке $s$, заданной в Гёделевой нумерации.
+Функции для сложения, умножения, ограниченного вычитания и деления с остатком считайте заданными.
+\item Покажите, что для любой формулы $\beta(x)$ найдётся такая формула $\alpha$, 
+что $\vdash\beta(\alpha)\rightarrow\alpha$. Указание: используйте формулу $\forall a.\sigma(b,b,a)\rightarrow\beta(a)$,
+где $\sigma(p,q,r)$ доказуема тогда и только тогда, когда $r$ --- результат замены всех свободных
+вхождений переменной $x$ в формуле $p$ на формулу $q$: $\rho = \pi[x := \psi]$, где
+$\ulcorner\rho\urcorner = r$, $\ulcorner\pi\urcorner = p$, $\ulcorner\psi\urcorner = q$.
+\item Приведите пример $\omega$-противоречивой, но непротиворечивой теории.
+\end{enumerate}
+
+\end{document}
