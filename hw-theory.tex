@@ -857,7 +857,7 @@ $\vdash \forall x.((P(x)\rightarrow Q(x))\rightarrow P(x))\rightarrow P(x)$
 Функции для сложения, умножения, ограниченного вычитания и деления с остатком считайте заданными.
 \item Постройте функцию, возвращающую символ, стоящий в позиции $n$ в строке $s$, заданной в Гёделевой нумерации.
 Функции для сложения, умножения, ограниченного вычитания и деления с остатком считайте заданными.
-\item Покажите, что для любой формулы $\beta(x)$ найдётся такая формула $\alpha$, 
+\item \emph{(Лемма об автоссылках)} Покажите, что для любой формулы $\beta(x)$ найдётся такая формула $\alpha$, 
 что $\vdash\alpha\rightarrow\beta(\alpha)$ и $\vdash\beta(\alpha)\rightarrow\alpha$. Указание: 
 используйте формулу $\forall a.\sigma(b,b,a)\rightarrow\beta(a)$,
 где $\sigma(p,q,r)$ доказуема тогда и только тогда, когда $r$ --- результат замены всех свободных
@@ -874,15 +874,47 @@ $\ulcorner\rho\urcorner = r$, $\ulcorner\pi\urcorner = p$, $\ulcorner\psi\urcorn
 $$2^{a_0} \cdot 3^{a_1} \cdot \dots \cdot (p(n))^{a_{n-1}}\ @\ 2^{b_0} \cdot 3^{b_1} \cdot \dots \cdot (p(m))^{b_{m-1}} =
   2^{a_0} \cdot 3^{a_1} \cdot \dots \cdot (p(n))^{a_{n-1}} \cdot (p(n+1))^{b_0} \cdot (p(n+2))^{b_1} \cdot \dots \cdot (p(n+m))^{b_{m-1}}$$
 
-\item Продолжение следует ...
+\item Пусть дана рекурсивная функция $\texttt{Proof}(p,x)$, возвращающая 0, если $x$ --- 
+гёделев номер функции $\xi$, а $p$ --- гёделев номер доказательства $\xi$.
+Тогда, используя её, выпишите (без пропусков) рекурсивную функцию, вычисляющую значение 
+любой представимой в формальной арифметике функции $f$ по формуле $\phi$, её представляющей.
 
-%\item Пусть дана рекурсивная функция $\texttt{Proof}(p,x)$, возвращающая 0, если $x$ --- 
-%гёделев номер функции $\xi$, а $p$ --- гёделев номер доказательства $\xi$.
-%Тогда, используя её, выпишите без <<маханий руками>> рекурсивную функцию, вычисляющую значение 
-%любой представимой в формальной арифметике функции $f$ по формуле $\phi$, её представляющей.
+В данном выражении можно использовать функции, про которые доказана их рекурсивность
+в предыдущих домашних заданиях.
 
-%В данном выражении можно использовать функции, про которые доказана их рекурсивность
-%в предыдущих домашних заданиях.
+\item Вторая теорема Гёделя о неполноте арифметики. Рассмотрим формулы:
+\begin{itemize}
+\item $\pi(p,x)$, выражающую рекурсивное отношение 
+<<$p$ --- гёделев номер доказательства формулы $x$>>;
+\item формулу $\pi_r(x) := \exists p.\pi(p,x)$;
+\item формулу $\textrm{Consis} := \neg\pi_r(\overline{\ulcorner 0=1\urcorner})$
+\end{itemize}
+С использованием этих определений, леммы об автоссылках и условий выводимости Гильберта-Бернайса-Лёфа,
+покажите, что:
+
+\begin{enumerate}
+\item Существует формула $\xi$, такая, что 
+$\vdash \xi \rightarrow \neg\pi_r(\overline{\ulcorner\xi\urcorner})$ и
+$\vdash \neg\pi_r(\overline{\ulcorner\xi\urcorner}) \rightarrow \xi$.
+Есть ли связь между данными формулами (или их составными частями) и формулой 
+$\sigma(\overline{\ulcorner\sigma\urcorner})$ из доказательства первой теоремы 
+Гёделя о неполноте арифметики?
+
+\item Если 
+$\vdash \pi_r (\overline{\ulcorner\xi\urcorner})\rightarrow \pi_r (\overline{\ulcorner 0=1 \urcorner})$, то 
+$\vdash \textrm{Consis} \rightarrow \xi$.
+
+\item $\pi_r(\overline{\ulcorner\xi\urcorner})\vdash \pi_r(\overline{\ulcorner \pi_r(\overline{\ulcorner \xi \urcorner}) \urcorner})$.
+\item $\vdash \pi_r(\overline{\ulcorner \pi_r(\overline{\ulcorner \xi \urcorner}) \rightarrow \neg\xi \urcorner})$.
+\item $\vdash \pi_r(\overline{\ulcorner \pi_r(\overline{\ulcorner \xi \urcorner}) \urcorner}) \rightarrow
+     \pi_r(\overline{\ulcorner \pi_r(\overline{\ulcorner \xi \urcorner}) \rightarrow \neg\xi \urcorner}) \rightarrow 
+     \pi_r(\overline{\ulcorner \neg\xi \urcorner})$.
+
+
+\item Показав $\vdash \pi_r (\overline{\ulcorner\xi\urcorner})\rightarrow \pi_r (\overline{\ulcorner 0=1 \urcorner})$,
+завершите доказательство второй теоремы Гёделя о неполноте арифметики.
+
+\end{enumerate}
 
 %\item Покажите следующий аналог первой теоремы Гёделя о неполноте арифметики: 
 %пусть 
